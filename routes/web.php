@@ -5,13 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,11 +13,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/p/create', [PostController::class, 'create'])->name('create_post')->middleware('auth');
-Route::post('/p/create', [PostController::class, 'store'])->name('store-post');
-Route::get('p/{post:slug}', [PostController::class, 'show'])->name('show_post')->middleware('auth');
+Route::get('/explore', [PostController::class, "explore"])->name('explore');
+Route::controller(PostController::class)->middleware('auth')->group(function(){
+    Route::get('/', 'index')->name('home');
+    Route::get('/p/create', 'create')->name('create_post');
+    Route::post('/p/create', 'store')->name('store-post');
+    Route::get('p/{post:slug}', 'show')->name('show_post');
+    Route::get('/p/{post:slug}/edit', 'edit')->name('edit_post');
+    Route::patch('/p/{post:slug}/update', 'update')->name('update_post');
+    Route::delete('/p/{post:slug}/delete', 'destroy')->name('delete_post');
+});
+
+
 Route::post('/p/{post:slug}/comment', [CommentController::class, 'store'])->name('store_post')->middleware('auth');
-Route::get('/p/{post:slug}/edit', [PostController::class, 'edit'])->name('edit_post')->middleware('auth');
-Route::patch('/p/{post:slug}/update', [PostController::class, 'update'])->name('update_post')->middleware('auth');
-Route::delete('/p/{post:slug}/delete', [PostController::class, 'destroy'])->name('delete_post')->middleware('auth');
+
 require __DIR__.'/auth.php';

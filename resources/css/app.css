@@ -6,6 +6,16 @@
     .card{
         @apply flex flex-col bg-white my-4 rounded-xl border border-gray-200;
     }
+    .card-header{
+        @apply flex flex-row p-5 items-center;
+    }
+    .card-body{
+
+    }
+    .card-footer{
+        @apply border-t border-t-gray-200 p-3 mt-3;
+    }
+  
 }
 @layer utilities{
     input[type ="file"]::file-selector-button{
@@ -17,4 +27,8 @@
         margin-inline-start: -1rem;
         margin-inline-end: 1rem;
     }
+    textarea{
+       @apply z-10
+    }
+    
 }
