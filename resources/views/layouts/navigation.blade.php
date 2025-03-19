@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Str;
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,15 +15,21 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+               
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @guest
+                    <div class="hidden md:flex md:items-center md:space-x-2">
+                        <div class="space-x-3 text-[i.6rem] mr-5 loading-5">
+                            <a href="/login"
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-trnsparent rounded-md font-semibold text-xs text-white uppercase tracking-widest mr-2">{{__("Login")}}</a>
+                            <a href="/register"
+                            class="inline-flex items-center px-4 py-2 font-semibold text-xs uppercase tracking-widest">{{__("Register")}}</a>
+                        </div>
+                    </div>
+                @endguest
                 @auth
                     <div class="flex items-center space-x-3">
                         <div class="space-x-3 text-[1.6rem] mr-2 leading-5">
@@ -38,14 +48,34 @@
                                 ? '<i class="bx bxs-message-square-add"></i>'
                                 : '<i class="bx bx-message-square-add" ></i>' !!}
                             </a>
+                            
+                            
+                               
                         </div>
+                        <x-dropdown align="right" width="96">
+                            <x-slot name="trigger">
+                                <button class="text-[1.6rem] ltr:mr-2 rtl:ml-2 leading-5">
+                                    <div class="relative">
+                                        <i class="bx bxs-inbox py-2 me-4"></i>
+                                        @livewire('pending-follower-count')
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                @livewire('pending-followers-list')
+                            </x-slot>
+                        </x-dropdown>
                     </div>
                 @endauth
+                <div class="hidden md:block">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <div>
-                            <img src="{{auth()->user()->image}}" class="w-6 h-6 rounded-full" alt="">
+                        @auth
+                        <div class="ml-3">
+                            <img src="{{Str::startsWith(auth()->user()->image, 'http') ? auth()->user()->image : asset("storage/" . auth()->user()->image)}}" class="w-6 h-6 rounded-full" alt="">
                         </div>
+                        @endauth
                     </x-slot>
 
                     <x-slot name="content">
@@ -65,6 +95,7 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
+                </div>
             </div>
 
             <!-- Hamburger -->
@@ -81,22 +112,33 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
+        
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            @guest
+            <x-responsive-nav-link :href="route('login')">
+                {{ __('Login') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register')">
+                {{ __('Register') }}
+            </x-responsive-nav-link>
+            @endguest
+            @auth
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
-
+            @endauth
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('explore')">
+                    {{ __('Explore') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('create_post')">
+                    {{ __('New Post') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

@@ -1,27 +1,17 @@
 <x-app-layout>
     <div class="flex flex-row max-w-3xl gap-8 mx-auto">
         {{-- left side --}}
-        <div class="w-[30rem] mx-auto lg:w-[95rem]">
-            @forelse ($posts as $post)
-            <x-post :post="$post"/>
-            @empty
-            <div class="max-w-2xl gap-8 mx-auto">
-                {{__('Start following your friends and enjoy.')}}
-            </div>
-                
-            @endforelse
-            
-        </div>
+        @livewire('post-list' )
         {{-- rihgt side --}}
         <div class="hidden w-[60rem] lg:flex lg:flex-col pt-4 ">
             <div class="flex flex-row text-sm">
                 <div class="mr-5">
-                    <a href="/{{auth()->user()->username}}">
-                        <img src="{{auth()->user()->image}}" alt="{{auth()->user()->username}}" class="border border-gray-300 rounded-full h-12 w-12">
+                    <a href="/u/{{auth()->user()->username}}">
+                        <img src="{{Str::startsWith(auth()->user()->image, 'http')? auth()->user()->image : asset('storage/' . auth()->user()->image)}}" alt="{{auth()->user()->username}}" class="border border-gray-300 rounded-full h-12 w-12">
                     </a>
                 </div>
                 <div class="flex flex-col">
-                    <a href="/{{auth()->user()->username}}" class="font-bold">
+                    <a href="/u/{{auth()->user()->username}}" class="font-bold">
                         {{auth()->user()->username}}
                     </a>
                     <div class="text-gray-500 text-sm">
@@ -35,19 +25,28 @@
                     @foreach ($suggested_users as $suggested_user)
                     <li class="flex flex-row my-5 text-sm justify-items-center">
                         <div class="mr-5">
-                            <a href="/{{$suggested_user->username}}">
-                                <img src="{{$suggested_user->image}}" class="rounded-full h-9 w-9 border border-gray-300">
+                            <a href="/u/{{$suggested_user->username}}">
+                                <img src="{{Str::startsWith($suggested_user->image, 'http')? $suggested_user->image : asset('storage/' . $suggested_user->image)}}" class="rounded-full h-9 w-9 border border-gray-300">
                             </a>
                         </div>
                         <div class="flex flex-col grow">
-                            <a href="/{{$suggested_user->username}}" class="font-bold">{{$suggested_user->username}}</a>
+                            <a href="/u/{{$suggested_user->username}}" class="font-bold">{{$suggested_user->username}}
+                                
+                                @livewire('follower-state', ['userId' => $suggested_user->id])
+                            </a>
                             <div class="text-gray-500 text-sm">{{$suggested_user->name}}</div>
                         </div>
+                        @if (auth()->user()->isPending($suggested_user))
+                            <span class="text-gray-500 font-bold">{{__("Pending")}}</span>
+                        @else
+                        @livewire('follow-button', [ "userId" =>$suggested_user->id, "classes" => "text-blue-500"])
+                        @endif           
                     </li>
                         
                     @endforeach
                 </ul>
             </div>
+            
         </div>
     </div>
 </x-app-layout>

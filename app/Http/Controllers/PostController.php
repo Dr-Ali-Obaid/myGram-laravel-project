@@ -16,7 +16,8 @@ class PostController extends Controller
     public function index()
     {
         $suggested_users = auth()->user()->suggested_users();
-        $posts = Post::all();
+        $ids = auth()->user()->following()->wherePivot("confirmed" , true)->get()->pluck("id");
+        $posts = Post::whereIn("user_id", $ids)->latest()->get();
         return view('posts.index', compact(['posts', 'suggested_users']));
     }
 
@@ -51,7 +52,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->owner->image = Str::startsWith($post->owner->image, 'http')? $post->owner->image : asset('storage/' . $post->owner->iamge);
         return view('posts.show', compact('post'));
     }
 
@@ -60,6 +60,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize("update", $post );
         return view('posts.edit', compact('post'));
     }
 
@@ -68,6 +69,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $this->authorize("update", $post );
         $data = $request->validate([
             "description" => "required",
             "image" => ["nullable", "mimes:jpg,jpeg,gif,png"]
@@ -86,6 +88,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize("delete", $post );
         unlink(storage_path('app/public/' . $post->image));
         $post->delete();
         

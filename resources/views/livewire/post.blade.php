@@ -1,14 +1,23 @@
 <div class="card">
+    {{-- card header --}}
     <div class="card-header">
-        <img src="{{$post->owner->image}}" alt="" class="w-9 h-9 mr-2 rounded-full">
-        <a href="/{{$post->owner->username}}" class="font-bold">{{$post->owner->username}}</a>
+        
+        <img src="{{Str::startsWith($post->owner->image, 'http')? $post->owner->image : asset('storage/' . $post->owner->image)}}" alt="" class="w-9 h-9 mr-2 rounded-full">
+        <a href="/u/{{$post->owner->username}}" class="font-bold">{{$post->owner->username}}</a>
     </div>
+    {{-- card body --}}
     <div class="card-body">
         <div class="max-h-[35rem] overflow-hidden">
             <img src="{{ asset('storage/' . $post->image) }}" alt="{{$post->description}}" class="h-auto w-full object-cover">
         </div>
+        <div class="p-3 flex flex-row">
+        @livewire('like', ['post' => $post])
+        <a href="/p/{{$post->slug}}" class="grow">
+            <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
+        </a>
+        </div>
         <div class="p-3">
-            <a href="/{{$post->owner->username}}" class="font-bold mr-1">{{$post->owner->username}}</a>
+            <a href="/u/{{$post->owner->username}}" class="font-bold mr-1">{{$post->owner->username}}</a>
             {{$post->description}}
         </div>
         <div class="p-3">
@@ -23,6 +32,7 @@
         </div>
        
     </div>
+    {{-- card footer --}}
     <div class="card-footer ">
         <form action="/p/{{$post->slug}}/comment" method="POST">
             @csrf
@@ -34,3 +44,4 @@
         </form>
     </div>
 </div>
+
