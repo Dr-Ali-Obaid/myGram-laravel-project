@@ -20,11 +20,8 @@ Route::get("/u/{user:username}/edit", [UserController::class, "edit"])->middlewa
 
 Route::controller(PostController::class)->middleware('auth')->group(function(){
     Route::get('/', 'index')->name('home');
-    Route::get('/p/create', 'create')->name('create_post');
     Route::post('/p/create', 'store')->name('store-post');
     Route::get('p/{post:slug}', 'show')->name('show_post');
-    Route::get('/p/{post:slug}/edit', 'edit')->name('edit_post');
-    Route::patch('/p/{post:slug}/update', 'update')->name('update_post');
     Route::delete('/p/{post:slug}/delete', 'destroy')->name('delete_post');
 });
 

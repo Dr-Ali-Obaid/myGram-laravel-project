@@ -14,6 +14,10 @@ use Illuminate\Support\Str;
                     </a>
                 </div>
 
+                <div class="hidden sm:flex sm:items-center">
+                    @livewire('search')
+                </div>
+
                 <!-- Navigation Links -->
                
             </div>
@@ -43,11 +47,9 @@ use Illuminate\Support\Str;
                                 ? '<i class="bx bxs-compass"></i>'
                                 : '<i class="bx bx-compass" ></i>' !!}
                             </a>
-                            <a href="{{route('create_post')}}">
-                                {!! url()->current() == route("create_post")
-                                ? '<i class="bx bxs-message-square-add"></i>'
-                                : '<i class="bx bx-message-square-add" ></i>' !!}
-                            </a>
+                            <button onclick="Livewire.dispatch('openModal', { component: 'create-post-modal'})">
+                                <i class="bx bx-message-square-add"></i>
+                            </button>
                             
                             
                                
@@ -97,7 +99,7 @@ use Illuminate\Support\Str;
                 </x-dropdown>
                 </div>
             </div>
-
+            
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -137,7 +139,7 @@ use Illuminate\Support\Str;
                 <x-responsive-nav-link :href="route('explore')">
                     {{ __('Explore') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('create_post')">
+                <x-responsive-nav-link class="cursor-pointer" onclick="Livewire.dispatch('openModal', { component: 'create-post-modal'})">
                     {{ __('New Post') }}
                 </x-responsive-nav-link>
 

@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        
     }
 
     /**
@@ -60,27 +60,15 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $this->authorize("update", $post );
-        return view('posts.edit', compact('post'));
+    
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update()
     {
-        $this->authorize("update", $post );
-        $data = $request->validate([
-            "description" => "required",
-            "image" => ["nullable", "mimes:jpg,jpeg,gif,png"]
-        ]);
-        if($request->has('image')){
-            $image = $request['image']->store('posts', 'public');
-            $data['image'] = $image;
-        }
-        $post->update($data);
-
-        return redirect('/p/' . $post->slug);
+        
     }
 
     /**
@@ -92,7 +80,7 @@ class PostController extends Controller
         unlink(storage_path('app/public/' . $post->image));
         $post->delete();
         
-        return redirect('home');
+        return redirect()->route('home');
     }
     public function explore(){
         $posts = Post::whereRelation("owner", "private_account", "=", 0)

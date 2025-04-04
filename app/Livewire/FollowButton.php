@@ -24,7 +24,6 @@ class FollowButton extends Component
         auth()->user()->toggleFollow($this->user);
         $this->set_follow_state();
         $this->dispatch("toggling");
-       
     }
 
     protected function set_follow_state(){
