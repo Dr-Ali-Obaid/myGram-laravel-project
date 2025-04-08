@@ -8,39 +8,38 @@ use Livewire\Component;
 
 class FollowButton extends Component
 {
-    
     public $userId;
     protected $user;
     public $follow_state;
     public $classes;
 
-    public function mount(){
+    public function mount()
+    {
         $this->user = User::find($this->userId);
         $this->set_follow_state();
     }
 
-    public function toggling(){
+    public function toggling()
+    {
         $this->user = User::find($this->userId);
         auth()->user()->toggleFollow($this->user);
         $this->set_follow_state();
         $this->dispatch("toggling");
     }
 
-    protected function set_follow_state(){
-        
-        if(auth()->user()->isPending($this->user)){
+    protected function set_follow_state()
+    {
+        if (auth()->user()->isPending($this->user)) {
             $this->follow_state = "Pending";
-        }
-        elseif(auth()->user()->isFollowing($this->user)){
+        } elseif (auth()->user()->isFollowing($this->user)) {
             $this->follow_state = "Unfollow";
-        }
-        else{
+        } else {
             $this->follow_state = "Follow";
         }
     }
 
     public function render()
     {
-        return view('livewire.follow-button');
+        return view("livewire.follow-button");
     }
 }

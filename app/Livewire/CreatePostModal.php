@@ -14,16 +14,17 @@ class CreatePostModal extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '4xl';
+        return "4xl";
     }
 
-    public function save_temp(){
+    public function save_temp()
+    {
         $image = $this->image->store("temp", "public");
         $this->dispatch("openModal", "filters-modal", ["image" => $image]);
     }
 
     public function render()
     {
-        return view('livewire.create-post-modal');
+        return view("livewire.create-post-modal");
     }
 }

@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\On; 
+use Livewire\Attributes\On;
 
 class Follower extends Component
 {
@@ -13,12 +13,13 @@ class Follower extends Component
     protected $user;
     #[On("toggling")]
     #[Computed]
-    public function countFollowers(){
+    public function countFollowers()
+    {
         $this->user = User::find($this->userId);
         return $this->user->follower()->count();
     }
     public function render()
     {
-        return view('livewire.follower');
+        return view("livewire.follower");
     }
 }

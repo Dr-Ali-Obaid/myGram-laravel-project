@@ -24,14 +24,17 @@ class UpdateUserProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-        
         return [
-            "username" => ["required", Rule::unique("users")->ignore($this->user())],
+            "username" => [
+                "required",
+                Rule::unique("users")->ignore($this->user()),
+            ],
             "bio" => "nullable",
             "image" => "image",
             "name" => "required",
-            "email" => ["required" , "email"],
-            "password" => ["min:8", "nullable", "confirmed"]
+            "email" => ["required", "email"],
+            "password" => ["min:8", "nullable", "confirmed"],
+            "lang" => "required",
         ];
     }
 }

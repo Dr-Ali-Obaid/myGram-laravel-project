@@ -12,25 +12,27 @@ class EditPostModal extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '4xl';
+        return "4xl";
     }
 
-    public function mount(Post $post){
+    public function mount(Post $post)
+    {
         $this->post = $post;
         $this->description = $post->description;
     }
 
-    public function update(){
+    public function update()
+    {
         $this->validate([
-            "description" => "required"
+            "description" => "required",
         ]);
         $this->post->update([
-           "description" => $this->description 
+            "description" => $this->description,
         ]);
         return redirect()->route("show_post", ["post" => $this->post->slug]);
     }
     public function render()
     {
-        return view('livewire.edit-post-modal');
+        return view("livewire.edit-post-modal");
     }
 }

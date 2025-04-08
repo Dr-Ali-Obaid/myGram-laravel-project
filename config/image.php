@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Image Driver
@@ -16,8 +15,8 @@ return [
     |
     */
 
-    'driver' => \Intervention\Image\Drivers\Gd\Driver::class,
-            
+    "driver" => \Intervention\Image\Drivers\Gd\Driver::class,
+
     /*
     |--------------------------------------------------------------------------
     | Configuration Options
@@ -37,10 +36,10 @@ return [
     |    encoding images.
     */
 
-    'options' => [
-        'autoOrientation' => true,
-        'decodeAnimation' => true,
-        'blendingColor' => 'ffffff',
-        'strip' => false,
-    ]
+    "options" => [
+        "autoOrientation" => true,
+        "decodeAnimation" => true,
+        "blendingColor" => "ffffff",
+        "strip" => false,
+    ],
 ];

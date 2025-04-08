@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define("edit-update-user", fn(User $user, User $other)=> $user->id == $other->id);
+        Gate::define(
+            "edit-update-user",
+            fn(User $user, User $other) => $user->id == $other->id
+        );
     }
 }

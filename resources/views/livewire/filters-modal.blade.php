@@ -18,7 +18,7 @@
         </div>
         <div class="mt-auto flex flex-row items-center">
             <div>
-                <img src="{{Str::startsWith(auth()->user()->image, 'http')? auth()->user()->image : asset('storage/' . auth()->user()->image)}}" class="w-10 h-10 mr-2 rounded-full border border-neutral-300">
+                <img src="{{Str::startsWith(auth()->user()->image, 'http')? auth()->user()->image : asset('storage/' . auth()->user()->image)}}" class="w-10 h-10 ltr:mr-2 rtl:ml-2 rounded-full border border-neutral-300">
             </div>
             <div class="flex flex-col grow">
                 <div class="font-bold">

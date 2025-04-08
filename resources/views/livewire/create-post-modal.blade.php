@@ -1,8 +1,8 @@
 <div class="h-[50rem] flex flex-col justify-center">
-    <div class="w-5xl flex items-center border-b border-b-2 border-b-neutral-100 p-2">
+    <div class="w-5xl flex items-center border-b-2 border-b-neutral-100 p-2">
         <h1 class="text-lg text-center grow">{{ __('Create New Post') }}</h1>
         @if ($image)
-            <button class="font-bold text-blue-400 mr-3" wire:click="save_temp">{{ __('Next') }}</button>
+            <button class="font-bold text-blue-400 ltr:mr-3 rtl:ml-3" wire:click="save_temp">{{ __('Next') }}</button>
         @endif
     </div>
     @if ($image)

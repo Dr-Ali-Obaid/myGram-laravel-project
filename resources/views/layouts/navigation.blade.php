@@ -26,9 +26,9 @@ use Illuminate\Support\Str;
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 @guest
                     <div class="hidden md:flex md:items-center md:space-x-2">
-                        <div class="space-x-3 text-[i.6rem] mr-5 loading-5">
+                        <div class="space-x-3 text-[i.6rem] ltr:mr-5 rtl:ml-5 loading-5">
                             <a href="/login"
-                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-trnsparent rounded-md font-semibold text-xs text-white uppercase tracking-widest mr-2">{{__("Login")}}</a>
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-trnsparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ltr:mr-2 rtl:ml-2">{{__("Login")}}</a>
                             <a href="/register"
                             class="inline-flex items-center px-4 py-2 font-semibold text-xs uppercase tracking-widest">{{__("Register")}}</a>
                         </div>
@@ -36,8 +36,8 @@ use Illuminate\Support\Str;
                 @endguest
                 @auth
                     <div class="flex items-center space-x-3">
-                        <div class="space-x-3 text-[1.6rem] mr-2 leading-5">
-                            <a href="{{route('home')}}">
+                        <div class="space-x-3 text-[1.6rem] ltr:mr-2 rtl:ml-2 leading-5">
+                            <a href="{{route('home')}}" class="ltr:mr-3 rtl:ml-3">
                                 {!! url()->current() == route("home")
                                 ? '<i class="bx bxs-home-alt-2"></i>'
                                 : '<i class="bx bx-home-alt-2" ></i>' !!}
@@ -74,7 +74,7 @@ use Illuminate\Support\Str;
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         @auth
-                        <div class="ml-3">
+                        <div class="ltr:ml-3 rtl:mr-3">
                             <img src="{{Str::startsWith(auth()->user()->image, 'http') ? auth()->user()->image : asset("storage/" . auth()->user()->image)}}" class="w-6 h-6 rounded-full" alt="">
                         </div>
                         @endauth
