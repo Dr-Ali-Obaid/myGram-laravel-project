@@ -116,7 +116,8 @@ class FiltersModal extends ModalComponent
             "description" => "required",
         ]);
         $post_image = "posts/" . Str::random(20) . ".jpeg";
-        Storage::disk("public")->move($this->filtered_image, $post_image);
+        Storage::disk('public')->put($post_image, Storage::disk('public')->get($this->filtered_image));
+        Storage::disk('public')->delete($this->filtered_image);
 
         $post = auth()
             ->user()
