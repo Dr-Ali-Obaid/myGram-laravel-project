@@ -12,7 +12,7 @@ return [
     |
     */
 
-    "default" => env("FILESYSTEM_DISK", "local"),
+    "default" => env("FILESYSTEM_DISK", "s3"),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,16 +51,14 @@ return [
             "bucket" => env("AWS_BUCKET"),
             "url" => env("AWS_URL"),
             "endpoint" => env("AWS_ENDPOINT"),
-            "use_path_style_endpoint" => env(
-                "AWS_USE_PATH_STYLE_ENDPOINT",
-                false
-            ),
+            "use_path_style_endpoint" => env("AWS_USE_PATH_STYLE_ENDPOINT", false),
             'throw' => true, // تغيير من false إلى true لرؤية الأخطاء بوضوح
             'visibility' => 'public', // إضافة هذا السطر المهم
             'options' => [
                 'CacheControl' => 'max-age=31536000',
             ],
         ],
+
     ],
 
     /*
