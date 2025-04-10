@@ -55,7 +55,11 @@ return [
                 "AWS_USE_PATH_STYLE_ENDPOINT",
                 false
             ),
-            "throw" => false,
+            'throw' => true, // تغيير من false إلى true لرؤية الأخطاء بوضوح
+            'visibility' => 'public', // إضافة هذا السطر المهم
+            'options' => [
+                'CacheControl' => 'max-age=31536000',
+            ],
         ],
     ],
 
