@@ -45,13 +45,7 @@ class FiltersModal extends ModalComponent
         $manager = new ImageManager(new Driver());
 
         // read an image
-        $path = storage_path(
-            "app" .
-                DIRECTORY_SEPARATOR .
-                "public" .
-                DIRECTORY_SEPARATOR .
-                $this->image
-        );
+        $path = Storage::disk('public')->get($this->image);
         $img = $manager->read($path);
 
         // increase brightness
@@ -74,13 +68,7 @@ class FiltersModal extends ModalComponent
     public function filter_gingham()
     {
         $manager = new ImageManager(new Driver());
-        $path = storage_path(
-            "app" .
-                DIRECTORY_SEPARATOR .
-                "public" .
-                DIRECTORY_SEPARATOR .
-                $this->image
-        );
+        $path = Storage::disk('public')->get($this->image);
         $img = $manager->read($path);
         $img = $img
             ->brightness(10)
@@ -97,13 +85,7 @@ class FiltersModal extends ModalComponent
     public function filter_moon()
     {
         $manager = new ImageManager(new Driver());
-        $path = storage_path(
-            "app" .
-                DIRECTORY_SEPARATOR .
-                "public" .
-                DIRECTORY_SEPARATOR .
-                $this->image
-        );
+        $path = Storage::disk('public')->get($this->image);
         $img = $manager->read($path);
         $img = $img->greyscale();
         $filteredFileName = Str::random(20) . ".jpeg";
@@ -115,13 +97,7 @@ class FiltersModal extends ModalComponent
     public function filter_perpetua()
     {
         $manager = new ImageManager(new Driver());
-        $path = storage_path(
-            "app" .
-                DIRECTORY_SEPARATOR .
-                "public" .
-                DIRECTORY_SEPARATOR .
-                $this->image
-        );
+        $path = Storage::disk('public')->get($this->image);
         $img = $manager->read($path);
         $img = $img
             ->colorize(-30, 10, 10)
