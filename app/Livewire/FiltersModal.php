@@ -57,7 +57,7 @@ class FiltersModal extends ModalComponent
         // تحديد مسار التخزين
         $filteredImagePath = "temp/" . $filteredFileName;
         // حفظ الصورة الجديدة في مجلد public/temp
-        $img->save(storage_path("app/public/" . $filteredImagePath));
+        Storage::disk('public')->put($filteredImagePath, (string) $img->encode());
 
         // تخزين المسار الصحيح لاستخدامه في العرض
         $this->filtered_image = $filteredImagePath;
@@ -77,7 +77,7 @@ class FiltersModal extends ModalComponent
             ->gamma(1.1);
         $filteredFileName = Str::random(20) . ".jpeg";
         $filteredImagePath = "temp/" . $filteredFileName;
-        $img->save(storage_path("app/public/" . $filteredImagePath));
+        Storage::disk('public')->put($filteredImagePath, (string) $img->encode());
         $this->filtered_image = $filteredImagePath;
         $this->add_temp_image($this->filtered_image);
     }
@@ -90,7 +90,7 @@ class FiltersModal extends ModalComponent
         $img = $img->greyscale();
         $filteredFileName = Str::random(20) . ".jpeg";
         $filteredImagePath = "temp/" . $filteredFileName;
-        $img->save(storage_path("app/public/" . $filteredImagePath));
+        Storage::disk('public')->put($filteredImagePath, (string) $img->encode());
         $this->filtered_image = $filteredImagePath;
         $this->add_temp_image($this->filtered_image);
     }
@@ -105,7 +105,7 @@ class FiltersModal extends ModalComponent
             ->gamma(0.9);
         $filteredFileName = Str::random(20) . ".jpeg";
         $filteredImagePath = "temp/" . $filteredFileName;
-        $img->save(storage_path("app/public/" . $filteredImagePath));
+        Storage::disk('public')->put($filteredImagePath, (string) $img->encode());
         $this->filtered_image = $filteredImagePath;
         $this->add_temp_image($this->filtered_image);
     }
