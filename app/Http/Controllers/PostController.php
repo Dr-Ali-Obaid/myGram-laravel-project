@@ -73,7 +73,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize("delete", $post);
-        unlink(storage_path("app/public/" . $post->image));
+        // حذف الصورة من التخزين (محلي أو سحابي)
+        Storage::disk('public')->delete($post->image);
+
         $post->delete();
 
         return redirect()->route("home");
