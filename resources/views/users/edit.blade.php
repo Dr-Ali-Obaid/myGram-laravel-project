@@ -27,7 +27,7 @@
         <div class="sm:col-span-4">
           <label for="image" class="block text-sm/6 font-medium text-gray-900">{{__("Photo")}}</label>
           <div class="mt-2 flex items-center gap-x-3">
-            <img src="{{Str::startsWith(auth()->user()->image, 'http') ? auth()->user()->image : asset("storage/" . auth()->user()->image)}}" class="h-12 w-12 rounded-full ltr:mr-5 rtl:ml-5 border border-gray-300">
+            <img src="{{Str::startsWith(auth()->user()->image, 'http') ? auth()->user()->image : Storage::url(auth()->user()->image)}}" class="h-12 w-12 rounded-full ltr:mr-5 rtl:ml-5 border border-gray-300">
             <input type="file" name="image" id="file_input" class="w-full border border-gray-200 bg-gray-50 block rounded-xl focus:outline-none hidden">
             <button type="button" onclick=" document.getElementById('file_input').click()" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">{{__("Change Photo")}}</button>
           </div>

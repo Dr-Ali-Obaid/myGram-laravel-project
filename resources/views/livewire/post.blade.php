@@ -2,13 +2,13 @@
     {{-- card header --}}
     <div class="card-header">
         
-        <img src="{{Str::startsWith($post->owner->image, 'http')? $post->owner->image : asset('storage/' . $post->owner->image)}}" alt="" class="w-9 h-9 ltr:mr-2 rtl:ml-2 rounded-full">
+        <img src="{{Str::startsWith($post->owner->image, 'http')? $post->owner->image : Storage::url($post->owner->image)}}" alt="" class="w-9 h-9 ltr:mr-2 rtl:ml-2 rounded-full">
         <a href="/u/{{$post->owner->username}}" class="font-bold">{{$post->owner->username}}</a>
     </div>
     {{-- card body --}}
     <div class="card-body">
         <div class="max-h-[35rem] overflow-hidden">
-            <img src="{{ asset('storage/' . $post->image) }}" alt="{{$post->description}}" class="h-auto w-full object-cover">
+            <img src="{{ Storage::url($post->image) }}" alt="{{$post->description}}" class="h-auto w-full object-cover">
         </div>
         <div class="p-3 flex flex-row">
         @livewire('like', ['post' => $post])

@@ -3,7 +3,7 @@
     @forelse (auth()->user()->pending_followers as $pending)
     <li class="flex flex-row w-full p-3 items-center text-sm">
                 <div>
-                    <img src="{{Str::startsWith($pending->image, 'http') ? $pending->image : asset("storage/" . $pending->image)}}" class="w-8 h-8 mr-2 border border-neutral-300 rounded-full" alt="{{$pending->username}}">
+                    <img src="{{Str::startsWith($pending->image, 'http') ? $pending->image : Storage::url($pending->image)}}" class="w-8 h-8 mr-2 border border-neutral-300 rounded-full" alt="{{$pending->username}}">
                 </div>
                 <div class="flex flex-col grow">
                     <div class="font-bold">

@@ -7,7 +7,7 @@
             <div class="flex flex-row text-sm">
                 <div class="ltr:mr-5 rtl:ml-5">
                     <a href="/u/{{auth()->user()->username}}">
-                        <img src="{{Str::startsWith(auth()->user()->image, 'http')? auth()->user()->image : asset('storage/' . auth()->user()->image)}}" alt="{{auth()->user()->username}}" class="border border-gray-300 rounded-full h-12 w-12">
+                        <img src="{{Str::startsWith(auth()->user()->image, 'http')? auth()->user()->image : Storage::url(auth()->user()->image)}}" alt="{{auth()->user()->username}}" class="border border-gray-300 rounded-full h-12 w-12">
                     </a>
                 </div>
                 <div class="flex flex-col">
@@ -26,7 +26,7 @@
                     <li class="flex flex-row my-5 text-sm justify-items-center">
                         <div class="ltr:mr-5 rtl:ml-5">
                             <a href="/u/{{$suggested_user->username}}">
-                                <img src="{{Str::startsWith($suggested_user->image, 'http')? $suggested_user->image : asset('storage/' . $suggested_user->image)}}" class="rounded-full h-9 w-9 border border-gray-300">
+                                <img src="{{Str::startsWith($suggested_user->image, 'http')? $suggested_user->image : Storage::url($suggested_user->image)}}" class="rounded-full h-9 w-9 border border-gray-300">
                             </a>
                         </div>
                         <div class="flex flex-col grow">

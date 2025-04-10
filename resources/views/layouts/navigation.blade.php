@@ -75,7 +75,7 @@ use Illuminate\Support\Str;
                     <x-slot name="trigger">
                         @auth
                         <div class="ltr:ml-3 rtl:mr-3">
-                            <img src="{{Str::startsWith(auth()->user()->image, 'http') ? auth()->user()->image : asset("storage/" . auth()->user()->image)}}" class="w-6 h-6 rounded-full" alt="">
+                            <img src="{{Str::startsWith(auth()->user()->image, 'http') ? auth()->user()->image : Storage::url(auth()->user()->image)}}" class="w-6 h-6 rounded-full" alt="">
                         </div>
                         @endauth
                     </x-slot>

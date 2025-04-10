@@ -9,7 +9,7 @@
         @forelse ($this->followerlist() as $follower)
             <li class="flex flex-row w-full p-3 items-center text-sm">
                 <div>
-                    <img src="{{Str::startsWith($follower->image, 'http') ? $follower->image : asset("storage/" . $follower->image)}}" class="w-8 h-8 mr-2 border border-neutral-300 rounded-full" alt="{{$follower->username}}">
+                    <img src="{{ Str::startsWith($follower->image, 'http') ? $follower->image : Storage::url($follower->image) }}" class="w-8 h-8 mr-2 border border-neutral-300 rounded-full" alt="{{$follower->username}}">
                 </div>
                 <div class="flex flex-col grow">
                     <div class="font-bold">

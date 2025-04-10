@@ -3,7 +3,7 @@
         @foreach ($posts as $post)
             <div>
                 <a href="/p/{{ $post->slug }}">
-                    <img src="{{ asset('storage/' . $post->image) }}" class="w-full aspect-square object-cover">
+                    <img src="{{ Storage::url($post->image) }}" class="w-full aspect-square object-cover">
                 </a>
             </div>
         @endforeach

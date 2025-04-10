@@ -2,7 +2,7 @@
     <div class="h-screen md:flex md:flex-row">
         {{-- left side --}}
         <div class="h-full md:w-7/12 bg-black flex items-center">
-            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->description }}"
+            <img src="{{ Storage::url($post->image) }}" alt="{{ $post->description }}"
                 class="max-h-screen object-cover mx-auto ">
         </div>
 
@@ -11,7 +11,7 @@
             {{-- top --}}
             <div class="border-b-2">
                 <div class="flex items-center p-5">
-                    <img src="{{ Str::startsWith($post->owner->image, 'http') ? $post->owner->image : asset('storage/' . $post->owner->image) }}"
+                    <img src="{{ Str::startsWith($post->owner->image, 'http') ? $post->owner->image : Storage::url($post->owner->image) }}"
                         class="ltr:mr-5 rtl:ml-5 h-10 w-10 rounded-full">
                     <div class="grow">
                         <a href="/u/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
@@ -36,7 +36,7 @@
             {{-- middle --}}
             <div class="grow overflow-y-auto">
                 <div class="flex items-start p-5">
-                    <img src="{{ Str::startsWith($post->owner->image, 'http') ? $post->owner->image : asset('storage/' . $post->owner->image) }}"
+                    <img src="{{ Str::startsWith($post->owner->image, 'http') ? $post->owner->image : Storage::url($post->owner->image) }}"
                         class="ltr:mr-5 rtl:ml-5 h-10 w-10 rounded-full">
                     <div>
                         <a href="/u/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
@@ -50,7 +50,7 @@
                 @foreach ($post->comments as $comment)
                     <div class="flex items-start px-5 py-2">
 
-                        <img src="{{ Str::startsWith($comment->owner->image, 'http') ? $comment->owner->image : asset('storage/' . $comment->owner->image) }}"
+                        <img src="{{ Str::startsWith($comment->owner->image, 'http') ? $comment->owner->image : Storage::url($comment->owner->image) }}"
                             class="h-10 ltr:mr-5 rtl:ml-5 w-10 rounded-full">
                         <div class="flex flex-col">
                             <div>

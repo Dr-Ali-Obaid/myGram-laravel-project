@@ -18,7 +18,7 @@ autocomplete="off"/>
              wire:click="goto('{{ $result->username }}')"
              >
              <div>
-                 <img src="{{Str::startsWith($result->image, 'http') ? $result->image : asset('storage/' . $result->image) }}"
+                 <img src="{{Str::startsWith($result->image, 'http') ? $result->image : Storage::url($result->image) }}"
                       class="w-10 h-10 ltr:mr-2 rtl:ml-2 rounded-full border border-neutral-300">
              </div>
              <div class="flex flex-col grow">

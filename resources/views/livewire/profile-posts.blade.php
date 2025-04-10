@@ -3,7 +3,7 @@
     <div class="grid grid-cols-3 gap-1 my-5">
         @foreach ($user->posts as $post)
             <a href="/p/{{$post->slug}}" class="block aspect-square w-full">
-            <img src="{{asset("storage/" . $post->image)}}" alt="{{$post->description}}" class="w-full aspect-square object-cover">
+            <img src="{{Storage::url($post->image)}}" alt="{{$post->description}}" class="w-full aspect-square object-cover">
         </a>
         @endforeach
     </div>

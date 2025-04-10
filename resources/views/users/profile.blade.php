@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
     <div class="grid grid-cols-4">
         {{-- user image --}}
         <div class="px-4 col-span-1 order-1">
-            <img src="{{Str::startsWith($user->image, 'http') ? $user->image : asset("storage/" . $user->image)}}" alt="{{$user->username}} profile picture"
+            <img src="{{Str::startsWith($user->image, 'http') ? $user->image : Storage::url($user->image)}}" alt="{{$user->username}} profile picture"
             class="rounded-full w-20 h-20 md:w-40 md:h-40 border border-neutral-300">
         </div>
         {{-- username and buttons --}}
